@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn With Han!!</title>
+
+  <style>
+    :root {
+      --cream: #fffaf3;
+      --peach: #f7c7a3;
+      --sage: #b9d8b4;
+      --mint: #d8eee0;
+      --lavender: #d9c8ef;
+      --sky: #c9e6f4;
+      --yellow: #f6e3a1;
+      --rose: #efb7bd;
+      --wood: #8b6b4f;
+      --wood-dark: #5f4937;
+      --text: #4f453d;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(217, 200, 239, 0.45) 0 90px, transparent 91px),
+        radial-gradient(circle at 90% 20%, rgba(201, 230, 244, 0.45) 0 120px, transparent 121px),
+        radial-gradient(circle at 20% 85%, rgba(185, 216, 180, 0.4) 0 110px, transparent 111px),
+        var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: relative;
+      padding: 70px 20px 60px;
+      text-align: center;
+      background:
+        linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),
+        repeating-linear-gradient(
+          90deg,
+          #9b7759 0px,
+          #9b7759 50px,
+          #8b6b4f 50px,
+          #8b6b4f 100px
+        );
+      color: white;
+      border-bottom: 8px solid var(--yellow);
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(70, 48, 32, 0.08);
+      pointer-events: none;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .mascot {
+      font-size: 86px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 6px 0 rgba(0,0,0,0.08));
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+      text-shadow: 0 4px 0 rgba(95, 73, 55, 0.25);
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      background: rgba(255, 250, 243, 0.9);
+      color: var(--wood-dark);
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: 0 6px 0 rgba(95, 73, 55, 0.15);
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.85;
+      z-index: 1;
+    }
+
+    .circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--lavender);
+      top: 40px;
+      left: 7%;
+    }
+
+    .square {
+      width: 60px;
+      height: 60px;
+      background: var(--mint);
+      transform: rotate(18deg);
+      right: 9%;
+      top: 60px;
+      border-radius: 16px;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 45px solid transparent;
+      border-right: 45px solid transparent;
+      border-bottom: 75px solid var(--rose);
+      right: 18%;
+      bottom: 20px;
+      transform: rotate(10deg);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 55px 20px 80px;
+    }
+
+    .intro {
+      background: rgba(255,255,255,0.85);
+      border: 3px solid var(--wood);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 10px 10px 0 var(--peach);
+      margin-bottom: 55px;
+      text-align: center;
+    }
+
+    .intro h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: var(--wood-dark);
+    }
+
+    .intro p {
+      font-size: 1.08rem;
+      line-height: 1.7;
+      max-width: 750px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.3rem;
+      margin-bottom: 30px;
+      color: var(--wood-dark);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .video-card {
+      background: var(--white);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 10px 0 rgba(139, 107, 79, 0.18);
+      border: 3px solid rgba(139, 107, 79, 0.55);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-7px) rotate(-0.4deg);
+      box-shadow: 0 16px 0 rgba(139, 107, 79, 0.18);
+    }
+
+    .card-top {
+      padding: 15px 18px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--wood-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pink { background: var(--rose); }
+    .green { background: var(--sage); }
+    .purple { background: var(--lavender); }
+    .blue { background: var(--sky); }
+    .yellow { background: var(--yellow); }
+
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      background: #eee;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: none;
+      left: 0;
+      top: 0;
+    }
+
+    .card-content {
+      padding: 22px;
+    }
+
+    .card-content h3 {
+      margin-bottom: 10px;
+      font-size: 1.35rem;
+      color: var(--wood-dark);
+    }
+
+    .card-content p {
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .watch-link {
+      display: inline-block;
+      text-decoration: none;
+      color: var(--wood-dark);
+      font-weight: bold;
+      background: var(--mint);
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 2px solid var(--wood);
+      transition: 0.2s;
+    }
+
+    .watch-link:hover {
+      background: var(--yellow);
+      transform: scale(1.03);
+    }
+
+    .capybara-box {
+      margin-top: 60px;
+      padding: 28px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--sage), var(--mint));
+      border: 3px dashed var(--wood);
+      text-align: center;
+    }
+
+    .capybara-box .big-capy {
+      font-size: 70px;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      background: var(--wood-dark);
+      color: white;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding-top: 55px;
+      }
+
+      .mascot {
+        font-size: 68px;
+      }
+
+      .intro {
+        box-shadow: 6px 6px 0 var(--peach);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="shape circle"></div>
+    <div class="shape square"></div>
+    <div class="shape triangle"></div>
+
+    <div class="hero">
+      <div class="mascot">🦫</div>
+      <h1>Learn With Han!!</h1>
+      <div class="tagline">little lessons, big ideas 🌿✨</div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <h2>Welcome to my teaching portfolio!</h2>
+      <p>
+        Hi! This is my little corner of the internet where I share projects,
+        coding activities, teaching videos, and things I am learning along the way.
+        Grab a snack, hang out with the capybara, and explore!
+      </p>
+    </section>
+
+    <h2 class="section-title">My Learning Videos 🎥</h2>
+
+    <section class="video-grid">
+
+      <!-- VIDEO CARD 1 -->
+      <article class="video-card">
+        <div class="card-top pink">
+          <span>Nested Repeats</span>
+          <span>◇</span>
+        </div>
+
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+            title="Nested Repeats Video"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="card-content">
+          <h3>Nested Repeats in Snap!</h3>
+          <p>
+            In this activity, I explain how nested repeat loops work and how
+            they can make code shorter and more efficient.
+          </p>
+
+          <a
+            class="watch-link"
+            href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID"
+            target="_blank">
+            Watch on YouTube
+          </a>
+        </div>
+      </article>
+
+      <!-- VIDEO CARD 2 -->
+      <article class="video-card">
+        <div class="card-top green">
+          <span>Next Lesson</span>
+          <span>○</span>
+        </div>
+
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+            title="Lesson Video"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="card-content">
+          <h3>Coming Soon!</h3>
+          <p>
+            I can use this space for another coding lesson, reflection,
+            or classroom activity video.
+          </p>
+
+          <a
+            class="watch-link"
+            href="#"
+            target="_blank">
+            Watch Video
+          </a>
+        </div>
+      </article>
+
+      <!-- VIDEO CARD 3 -->
+      <article class="video-card">
+        <div class="card-top purple">
+          <span>Another Project</span>
+          <span>△</span>
+        </div>
+
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+            title="Project Video"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="card-content">
+          <h3>More Learning!</h3>
+          <p>
+            This card can be duplicated whenever I want to add another
+            project or teaching video.
+          </p>
+
+          <a
+            class="watch-link"
+            href="#"
+            target="_blank">
+            Watch Video
+          </a>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="capybara-box">
+      <div class="big-capy">🦫🌿</div>
+      <h2>Capybara Study Corner</h2>
+      <p>
+        Learning is better when it feels a little cozy.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    Made with ☕, curiosity, and capybara energy · Learn With Han!!
+  </footer>
+
+</body>
+</html>
